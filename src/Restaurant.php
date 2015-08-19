@@ -23,7 +23,16 @@
         }
 
         function getCuisines() {
-
+            $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM tasks ORDER BY cuisine;");
+            $cuisines = array();
+            foreach ($returned_cuisines as $cuisine) {
+                $cuisine_name = $cuisine['cuisine_name'];
+                $id = $cuisine['id'];
+                $restaurant_id = $cuisine['restaurant_id'];
+                $new_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
+                array_push($cuisines, $new_cuisine);
+            }
+            return $cuisines;
         }
 
         function save() {

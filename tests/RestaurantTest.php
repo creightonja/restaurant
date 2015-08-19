@@ -17,7 +17,7 @@
 
         protected function tearDown() {
             Restaurant::deleteAll();
-            //Cuisine::deleteAll();
+            Cuisine::deleteAll();
         }
 
         function test_getName() {
