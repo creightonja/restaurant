@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Restaurant List</title>
+    </head>
+    <body>
+        <h1>Cuisines</h1>
+        {% if cuisine is not empty %}
+            <p>Here are all your cuisines:</p>
+            <ul>
+                {% for dish in cuisine %}
+                    <li>{{ dish.getCuisineName }} -
+                        {% for restaurant in restaurants %}
+                            {% if dish.getRestaurantId == restaurant.getId %}
+                                {{ restaurant.getRestaurantName }}</li>
+                            {% endif %}
+                        {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+            <form action='/cuisine' method='post'>
+                <label for='cuisine_name'>Cuisine Name</label>
+                <input id='cuisine_name' name='cuisine_name' type='text'>
+                <select name="restaurant_id">
+                    {% for restaurant in restaurants %}
+                    <option value="{{ restaurant.getId }}">{{ restaurant.getRestaurantName }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type='submit'>Add Cuisine</button>
+            </form>
+
+            <form action='/delete_cuisines' method='post'>
+                <button type='submit'>Clear</button>
+            </form>
+
+            <p><a href='/'>Home</a></p>
+
+    </body>
+</html>

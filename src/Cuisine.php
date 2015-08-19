@@ -37,17 +37,21 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function update($new_cuisine_name) {
+            $GLOBALS['DB']->exec("UPDATE cuisine SET cuisine_name = '{$new_cuisine_name}'
+                    WHERE id = {$this->getId()};");
+            $this->setCuisineName($new_cuisine_name);
+        }
+
         static function getAll() {
             $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisine ORDER BY cuisine_name;");
             $cuisines = array();
-            var_dump($returned_cuisines);
             foreach ($returned_cuisines as $cuisine) {
                 $cuisine_name = $cuisine['cuisine_name'];
                 $id = $cuisine['id'];
                 $restaurant_id = $cuisine['restaurant_id'];
                 $new_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
                 array_push($cuisines, $new_cuisine);
-                var_dump($cuisines);
             }
             return $cuisines;
         }

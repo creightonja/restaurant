@@ -109,6 +109,22 @@
             //Assert
             $this->assertEquals($test_Restaurant, $result);
         }
+
+        function testUpdate() {
+            //Arrange
+            $restaurant_name = "Joes Burgers";
+            $id = null;
+            $test_restaurant = new Restaurant($restaurant_name, $id);
+            $test_restaurant->save();
+
+            $new_restaurant_name = "McDonalds";
+
+            //Act
+            $test_restaurant->update($new_restaurant_name);
+
+            //Assert
+            $this->assertEquals($new_restaurant_name, $test_restaurant->getRestaurantName());
+        }
     }
 
 ?>

@@ -105,6 +105,127 @@
 
         }
 
+        function test_getAll() {
+            //Arrange
+            $restaurant_name = "McDonalds";
+            $id = null;
+            $test_restaurant = new Restaurant($restaurant_name, $id);
+            $test_restaurant->save();
+
+            $cuisine_name = "Tacos";
+            $restaurant_id = $test_restaurant->getId();
+            $test_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
+            $test_cuisine->save();
+
+            $cuisine_name2 = "Tacos2";
+            $restaurant_id2 = $test_restaurant->getId();
+            $test_cuisine2 = new Cuisine($cuisine_name2, $id, $restaurant_id2);
+            $test_cuisine2->save();
+
+            //Act
+            $result = Cuisine::getAll();
+
+            //Assert
+            $this->assertEquals([$test_cuisine, $test_cuisine2], $result);
+
+
+        }
+
+        function test_deleteAll() {
+            //Arrange
+            $restaurant_name = "McDonalds";
+            $id = null;
+            $test_restaurant = new Restaurant($restaurant_name, $id);
+            $test_restaurant->save();
+
+            $cuisine_name = "Tacos";
+            $restaurant_id = $test_restaurant->getId();
+            $test_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
+            $test_cuisine->save();
+
+            $cuisine_name2 = "Tacos2";
+            $restaurant_id2 = $test_restaurant->getId();
+            $test_cuisine2 = new Cuisine($cuisine_name2, $id, $restaurant_id2);
+            $test_cuisine2->save();
+
+            //Act
+            Cuisine::deleteAll();
+            $result = Cuisine::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+
+        }
+
+        function test_find() {
+            //Arrange
+            $restaurant_name = "McDonalds";
+            $id = null;
+            $test_restaurant = new Restaurant($restaurant_name, $id);
+            $test_restaurant->save();
+
+            $cuisine_name = "Tacos";
+            $restaurant_id = $test_restaurant->getId();
+            $test_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
+            $test_cuisine->save();
+
+            $cuisine_name2 = "Tacos2";
+            $restaurant_id2 = $test_restaurant->getId();
+            $test_cuisine2 = new Cuisine($cuisine_name2, $id, $restaurant_id2);
+            $test_cuisine2->save();
+
+            //Act
+            $id = $test_cuisine->getId();
+            $result = Cuisine::find($id);
+
+            //Assert
+            $this->assertEquals($test_cuisine, $result);
+
+        }
+
+        function test_sort() {
+            //Arrange
+            $restaurant_name = "McDonalds";
+            $id = null;
+            $test_restaurant = new Restaurant($restaurant_name, $id);
+            $test_restaurant->save();
+
+            $cuisine_name2 = "Tacos2";
+            $restaurant_id2 = $test_restaurant->getId();
+            $test_cuisine2 = new Cuisine($cuisine_name2, $id, $restaurant_id2);
+            $test_cuisine2->save();
+
+            $cuisine_name = "Tacos";
+            $restaurant_id = $test_restaurant->getId();
+            $test_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
+            $test_cuisine->save();
+
+            //Act
+            $id = $test_cuisine->getId();
+            $result = Cuisine::getAll();
+
+            //Assert
+            $this->assertEquals([$test_cuisine, $test_cuisine2], $result);
+
+            }
+
+        function test_update() {
+            //Arrange
+            $cuisine_name = "tacos";
+            $id = null;
+            $restaurant_id = 2;
+            $test_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
+            $test_cuisine->save();
+
+            $new_cuisine_name = "burgers";
+
+            //Act
+            $test_cuisine->update($new_cuisine_name);
+
+            //Assert
+            $this->assertEquals("burgers", $test_cuisine->getCuisineName());
+
+        }
 
     }
 
