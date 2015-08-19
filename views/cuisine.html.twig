@@ -8,7 +8,7 @@
             <p>Here are all your cuisines:</p>
             <ul>
                 {% for dish in cuisine %}
-                    <li>{{ dish.getCuisineName }} -
+                    <li>{{ dish.getCuisineName }} <a href="/cuisine/{{ dish.getId }}/edit">Edit</a> -
                         {% for restaurant in restaurants %}
                             {% if dish.getRestaurantId == restaurant.getId %}
                                 {{ restaurant.getRestaurantName }}</li>
