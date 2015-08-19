@@ -50,9 +50,10 @@
 
         static function find($search_id){
             $found_restaurant = null;
-            $restaurant = Restaurant::getAll();
+            $restaurants = Restaurant::getAll();
             foreach($restaurants as $restaurant){
-                if ($id == $search_id) {
+                $restaurant_id = $restaurant->getId();
+                if ($restaurant_id == $search_id) {
                     $found_restaurant = $restaurant;
                 }
             }

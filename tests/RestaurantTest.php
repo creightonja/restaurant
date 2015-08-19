@@ -59,6 +59,56 @@
             $this->assertEquals($test_Restaurant, $result[0]);
 
         }
+
+        function test_getAll() {
+            //Arrange
+            $restaurant_name = "Joes Burgers";
+            $restaurant_name2 = "McDonalds";
+            $test_Restaurant = new Restaurant($restaurant_name);
+            $test_Restaurant->save();
+            $test_Restaurant2 = new Restaurant($restaurant_name2);
+            $test_Restaurant2->save();
+
+            //Act
+            $result = Restaurant::getAll();
+
+            //Assert
+            $this->assertEquals([$test_Restaurant, $test_Restaurant2], $result);
+        }
+
+        function test_deleteAll() {
+            //Arrange
+            $restaurant_name = "Joes Burgers";
+            $restaurant_name2 = "McDonalds";
+            $test_Restaurant = new Restaurant($restaurant_name);
+            $test_Restaurant->save();
+            $test_Restaurant2 = new Restaurant($restaurant_name2);
+            $test_Restaurant2->save();
+
+            //Act
+            Restaurant::deleteAll();
+            $result = Restaurant::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+
+        }
+
+        function test_find() {
+            //Arrange
+            $restaurant_name = "Joes Burgers";
+            $restaurant_name2 = "McDonalds";
+            $test_Restaurant = new Restaurant($restaurant_name);
+            $test_Restaurant->save();
+            $test_Restaurant2 = new Restaurant($restaurant_name2);
+            $test_Restaurant2->save();
+
+            //Act
+            $result = Restaurant::find($test_Restaurant->getId());
+
+            //Assert
+            $this->assertEquals($test_Restaurant, $result);
+        }
     }
 
 ?>
