@@ -1,7 +1,7 @@
 
-# Scrabble Score Calculator
+# Restaurants and their Cuisines
 
-##### Epicodus To Do List, 8/19/2015
+##### Restaurants and their Cuisines, 8/20/2015
 
 #### By Kenny Grage and Jason Creighton
 
@@ -12,14 +12,16 @@ This app will allow users to create a restaurant and manage cuisines within each
 ## Setup
 
 - clone this repository
-- Run $ composer install in project folder
+- Run $ composer update in project folder
+- Start mysql server
 - Start php server in web directory folder
 - navigate web browser to localhost:8000
+- Run phpmyadmin and import restaurant database from folder
 
 
 ## Technologies Used
 
-PHP, phpunit, Silex, Twig, HTML, CSS, Boostrap, Symfony, MySQL
+PHP, phpunit, Silex, Twig, HTML, CSS, Boostrap, Symfony, MySQL, PhpMyAdmin
 
 ### Legal
 

@@ -87,12 +87,15 @@
 
 
 
-
+    //Lists all cuisines and restaurants associated with the cuisines
+    //Comes from index.html.twig
+    //goes to post->/cuisine or post->/delete_cuisines or /cuisine/{id}/edit
     $app->get("/cuisine", function() use ($app) {
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => Cuisine::getAll(), 'restaurants' => Restaurant::getAll()));
     });
 
-
+    //Adding a new cuisine instance
+    //Comes from self, renders to self
     $app->post("/cuisine", function () use ($app) {
         $id = null;
         $restaurant_id = intval($_POST['restaurant_id']);
@@ -102,22 +105,26 @@
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => Cuisine::getAll(), 'restaurants' => Restaurant::getAll()));
     });
 
+    //Deletes all cuisines
+    //Comes from cuisine.html.twig
+    //Goes to index.html.twig
     $app->post("/delete_cuisine", function() use ($app) {
         Cuisine::deleteAll();
         return $app['twig']->render('index.html.twig');
     });
 
-
-
-
-
-    //Find and return a cuisine
+    //Find and return a cuisine to edit
+    //Comes from cuisine.html.twig
+    //Goes to cuisine_edit.html.twig to allow for deleting or updating
     $app->get("/cuisine/{id}/edit", function($id) use($app) {
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $cuisine));
     });
 
     //Update cuisine name
+    //Comes from cuisine_edit with passed in cuisine ID
+    //Render cuisine with the new updated cuisine
+    //post->/cuisine
     $app->patch("/cuisine/{id}", function($id) use($app) {
         $cuisine_name = $_POST['cuisine_name'];
         $cuisine = Cuisine::find($id);
@@ -126,8 +133,10 @@
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisines, 'restaurants' => Restaurant::getAll()));
     });
 
-
-
+    //Delete one cuisine
+    //Comes from cuisine_edit with passed in cuisine ID
+    //Render cuisine with missing cuisine
+    //post-/cuisine
     $app->delete("/cuisine/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         $cuisine->deleteOne();
