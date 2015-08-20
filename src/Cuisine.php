@@ -43,6 +43,13 @@
             $this->setCuisineName($new_cuisine_name);
         }
 
+        function deleteOne() {
+
+            $GLOBALS['DB']->exec("DELETE FROM cuisine WHERE id = {$this->getId()};");
+        //    $GLOBALS['DB']->exec("DELETE FROM 'restaurants'.'cuisine' WHERE id = {$this->getId()};");
+        //    $GLOBALS['DB']->exec("DELETE FROM cuisine WHERE {$this->getId()} IS NULL;");
+        }
+
         static function getAll() {
             $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisine ORDER BY cuisine_name;");
             $cuisines = array();

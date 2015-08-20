@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <form action="/restaurants/{{ restaurant.getId }}" method="post">
+            <input name="_method" type="hidden" value="delete">
+
+            <button type="submit">Delete this restaurant</button>
+        </form>
+    </body>
+</html>

@@ -227,6 +227,25 @@
 
         }
 
+        function testDelete() {
+            //Arrange
+            $restaurant_name = "McDonalds";
+            $id = null;
+            $test_restaurant = new Restaurant($restaurant_name, $id);
+            $test_restaurant->save();
+
+            $restaurant_id = $test_restaurant->getId();
+            $cuisine_name = "burgers";
+            $test_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
+            $test_cuisine->save();
+
+            //Act
+            $test_cuisine->deleteOne();
+
+            //Assert
+            $this->assertEquals([], Cuisine::getAll());
+        }
+
     }
 
 
