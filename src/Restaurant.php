@@ -47,6 +47,11 @@
             $this->setRestaurantName($new_restaurant_name);
         }
 
+        function deleteOne() {
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM cuisine WHERE restaurant_id = {$this->getId()};");
+        }
+
         static function getAll() {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
             $restaurants = array();

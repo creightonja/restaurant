@@ -125,6 +125,43 @@
             //Assert
             $this->assertEquals($new_restaurant_name, $test_restaurant->getRestaurantName());
         }
+
+        function testDelete() {
+            //Arrange
+            $restaurant_name = "McDonalds";
+            $id = null;
+            $test_restaurant = new Restaurant($restaurant_name, $id);
+            $test_restaurant->save();
+
+            $restaurant_name2 = "Joes Burgers";
+            $test_restaurant2 = new Restaurant($restaurant_name2, $id);
+            $test_restaurant2->save();
+
+            //Act
+            $test_restaurant->deleteOne();
+
+            //Assert
+            $this->assertEquals([$test_restaurant2], Restaurant::getAll());
+        }
+
+        function testDeleteCategoryTasks() {
+            //Arrange
+            $restaurant_name = "McDonalds";
+            $id = null;
+            $test_restaurant = new Restaurant($restaurant_name, $id);
+            $test_restaurant->save();
+
+            $cuisine_name = "Tacos";
+            $restaurant_id = $test_restaurant->getId();
+            $test_cuisine = new Cuisine($cuisine_name, $id, $restaurant_id);
+            $test_cuisine->save();
+
+            //Act
+            $test_restaurant->deleteOne();
+
+            //Assert
+            $this->assertEquals([], Cuisine::getAll());
+        }
     }
 
 ?>
